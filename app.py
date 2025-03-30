@@ -1,4 +1,5 @@
 from flask import Flask
+from flasgger import Swagger
 from Controller.mobile_plan_terms_controller import mobile_plan_terms_bp
 from config.database import db, init_db
 
@@ -14,6 +15,8 @@ with app.app_context():
 # 블루프린트 등록
 app.register_blueprint(mobile_plan_terms_bp, url_prefix='/mobile_plan_terms')  # mobile_plan_terms_bp 블루프린트를 등록하여 메모 관련 요청을 처리
 
+# Swagger 설정
+swagger = Swagger(app)
 
 if __name__ == '__main__':
     app.run(port="5000", host="0.0.0.0", debug=True)

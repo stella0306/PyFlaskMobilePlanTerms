@@ -16,6 +16,16 @@ mobile_plan_terms_service = MobilePlanTermsServiceImpl()
 # 모든 데이터 가져오기
 @mobile_plan_terms_bp.route("/search_all", methods=["GET"])
 def get_all_mobile_plans_terms():
+    """
+    모든 모바일 요금제 용어 데이터 조회 API
+    ---
+    tags:
+      - Mobile Plan Terms
+    responses:
+      200:
+        description: 모든 모바일 요금제 용어 데이터 목록
+    """
+
     mobile_plan_terms = mobile_plan_terms_service.get_all_mobile_plans_terms()
 
     mobile_plan_terms_dict = [mbt for mbt in mobile_plan_terms] if isinstance(mobile_plan_terms, list) else mobile_plan_terms
@@ -29,6 +39,22 @@ def get_all_mobile_plans_terms():
 # 이름으로 특정 데이터 가져오기
 @mobile_plan_terms_bp.route("/search_by_name/<string:name>", methods=["GET"])
 def get_mobile_plan_terms_by_name(name:str):
+    """
+    이름으로 특정 모바일 요금제 용어 데이터 조회 API
+    ---
+    tags:
+      - Mobile Plan Terms
+    parameters:
+      - name: name
+        in: path
+        type: string
+        required: true
+        description: 조회할 모바일 요금제 용어 이름
+    responses:
+      200:
+        description: 조회된 모바일 요금제 용어 정보
+    """
+    
     mobile_plan_terms = mobile_plan_terms_service.get_mobile_plan_terms_by_name(
         mobile_plan_terms_request_dto=MobilePlanTermsRequestDto(
             id=None, 
@@ -43,9 +69,25 @@ def get_mobile_plan_terms_by_name(name:str):
         status=200
     )
 
-# 이름으로 특정 데이터 가져오기
+# ID으로 특정 데이터 가져오기
 @mobile_plan_terms_bp.route("/search_by_id/<int:id>", methods=["GET"])
 def get_mobile_plan_terms_by_id(id:int):
+    """
+    ID으로 특정 모바일 요금제 용어 데이터 조회 API
+    ---
+    tags:
+      - Mobile Plan Terms
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+        description: 조회할 모바일 요금제 용어 ID
+    responses:
+      200:
+        description: 조회된 모바일 요금제 용어 정보
+    """
+
     mobile_plan_terms = mobile_plan_terms_service.get_mobile_plan_terms_by_id(
         mobile_plan_terms_request_dto=MobilePlanTermsRequestDto(
             id=id, 
@@ -64,6 +106,42 @@ def get_mobile_plan_terms_by_id(id:int):
 # 데이터 생성
 @mobile_plan_terms_bp.route("/create", methods=["POST"])
 def create_mobile_plan_terms():
+    """
+    모바일 요금제 용어 정보 생성 API
+    ---
+    tags:
+      - Mobile Plan Terms
+    parameters:
+      - in: body
+        name: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 용어 이름
+              required: true
+            description:
+              type: string
+              description: 용어 설명
+              required: true
+    responses:
+      200:
+        description: 생성된 모바일 요금제 용어 정보
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: 생성된 용어 ID
+            name:
+              type: string
+              description: 생성된 용어 이름
+            description:
+              type: string
+              description: 생성된 용어 설명
+    """
+
     # 데이터 가져오기
     data = request.get_json()
 
@@ -85,6 +163,32 @@ def create_mobile_plan_terms():
 # 데이터 식제
 @mobile_plan_terms_bp.route("/delete", methods=["DELETE"])
 def delete_mobile_plan_terms():
+    """
+    모바일 요금제 용어 정보 삭제 API
+    ---
+    tags:
+      - Mobile Plan Terms
+    parameters:
+      - in: body
+        name: body
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: 용어 ID
+              required: true
+    responses:
+      200:
+        description: 삭제된 모바일 요금제 용어 정보
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              description: 삭제 여부
+    """
+    
     # 데이터 가져오기
     data = request.get_json()
 
