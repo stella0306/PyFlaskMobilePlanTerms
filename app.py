@@ -16,6 +16,11 @@ with app.app_context():
 app.register_blueprint(mobile_plan_terms_bp, url_prefix='/mobile_plan_terms')  # mobile_plan_terms_bp 블루프린트를 등록하여 메모 관련 요청을 처리
 
 # Swagger 설정
+app.config['SWAGGER'] = {
+    "title": "Mobile Plan Terms(모바일 요금제 용어)",  # Swagger UI 제목 변경.
+    "description": "이 API 문서는 Mobile Plan Terms(모바일 요금제 용어)를 설명합니다."  # Swagger UI 설명 추가
+}
+
 swagger = Swagger(app)
 
 if __name__ == '__main__':
