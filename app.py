@@ -11,7 +11,6 @@ init_db(app)
 with app.app_context():
     db.create_all()
 
-
 # 블루프린트 등록
 app.register_blueprint(mobile_plan_terms_bp, url_prefix='/mobile_plan_terms')  # mobile_plan_terms_bp 블루프린트를 등록하여 메모 관련 요청을 처리
 
