@@ -11,7 +11,7 @@ class MobilePlanTermsEntity(db.Model):
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     # 데이터 이름 변수, 문자열 길이를 100으로 제한, Null을 허용하지 않음
-    name = db.Column(db.String(100), nullable=False)
+    name: str = db.Column(db.String(100), nullable=False)
 
     # 데이터 설명 변수, 문자열 길이를 200으로 제한, Null을 허용하지 않음.
-    description = db.Column(db.String(200), nullable=False)
+    description: str = db.Column(db.String(200), nullable=False)

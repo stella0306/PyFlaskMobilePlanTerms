@@ -1,6 +1,7 @@
 from flask import Flask
 from flasgger import Swagger
 from Controller.mobile_plan_terms_controller import mobile_plan_terms_bp
+from Controller.mobile_plan_term_members_controller import mobile_plan_term_members_bp
 from config.database import db, init_db
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ with app.app_context():
 
 # 블루프린트 등록
 app.register_blueprint(mobile_plan_terms_bp, url_prefix='/mobile_plan_terms')  # mobile_plan_terms_bp 블루프린트를 등록하여 메모 관련 요청을 처리
+app.register_blueprint(mobile_plan_term_members_bp, url_prefix="/mobile_plan_term_members")
 
 # Swagger 설정
 app.config['SWAGGER'] = {

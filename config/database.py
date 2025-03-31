@@ -4,6 +4,8 @@ from util.json_utils import open_json
 # SQLAlchemy 객체 생성 (Flask 인스턴스는 app.py에서 설정)
 db = SQLAlchemy()
 
+ADMIN_API_KEY = open_json(r"config\api_token.json")["api-token"]
+
 # 데이터베이스 설정 함수
 def init_db(app):
     # 하드코딩 방지를 위해 JSON에서 로드
